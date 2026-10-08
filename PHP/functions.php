@@ -57,3 +57,23 @@ function removeFirst($array, $value)
 
     return array_values($array);
 }
+
+function permutations(array $array): array
+{
+    if (count($array) <= 1) {
+        return [$array];
+    }
+    
+    $result = [];
+    
+    foreach ($array as $key => $value) {
+        $remaining = $array;
+        unset($remaining[$key]);
+        
+        foreach (permutations(array_values($remaining)) as $permutation) {
+            $result[] = [$value, ...$permutation];
+        }
+    }
+    
+    return $result;
+}
