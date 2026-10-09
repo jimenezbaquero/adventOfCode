@@ -91,3 +91,37 @@ function circularPermutations(array $elements): array {
     
     return $result;
 }
+
+function combinations(array $group, int $total): Generator
+{
+    $keys = array_keys($group);
+    $count = count($keys);
+    
+    yield from generateCombinations($keys, $total, $count, 0, []);
+}
+
+function generateCombinations(
+    array $keys,
+    int $remaining,
+    int $count,
+    int $index,
+    array $combination
+): Generator {
+    if ($index === $count - 1) {
+        $combination[$keys[$index]] = $remaining;
+        yield $combination;
+        return;
+    }
+    
+    for ($i = 0; $i <= $remaining; $i++) {
+        $combination[$keys[$index]] = $i;
+        
+        yield from generateCombinations(
+            $keys,
+            $remaining - $i,
+            $count,
+            $index + 1,
+            $combination
+        );
+    }
+}
