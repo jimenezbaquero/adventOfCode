@@ -77,3 +77,17 @@ function permutations(array $array): array
     
     return $result;
 }
+
+function circularPermutations(array $elements): array {
+    $first = array_shift($elements);
+    $permutations = permutations($elements);
+    
+    $result = [];
+    
+    foreach ($permutations as $permutation) {
+        array_unshift($permutation, $first);
+        $result[] = $permutation;
+    }
+    
+    return $result;
+}
