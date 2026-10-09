@@ -6,8 +6,6 @@ require_once('../../functions.php');
 $data = loadFile('input.txt');
 //$data = loadFile('test.txt');
 
-$total = 0;
-
 $instructions = [];
 $names = [];
 
