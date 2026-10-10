@@ -11,7 +11,6 @@ $password = $data[0];
 do {
     $password = preparePassword($password);
     $password = calculatePassword($password);
-    echo $password.PHP_EOL;
 } while (!isCorrect($password));
 
 echo 'Solution: ' . $password . PHP_EOL;
