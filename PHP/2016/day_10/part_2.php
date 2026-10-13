@@ -6,9 +6,6 @@ require_once('../../functions.php');
 $data = loadFile('input.txt');
 //$data = loadFile('test.txt');
 
-$maxFind = 61;
-$minFind = 17;
-
 $solution = null;
 
 $assigns = [];
@@ -41,16 +38,12 @@ foreach ($data as $line) {
 }
 
 foreach ($assigns as $assign) {
-    $containers['bot'][$assign['bot']][] = $assign['value'];
+    addChip($containers['bot'], intval($assign['bot']), $assign['value']);
 }
 
-$containers  = orderContainers($containers);
-
-$i = 1;
 $doneInstructions = 1;
 
 while($doneInstructions > 0) {
-    $aux = [];
     $doneInstructions = 0;
     foreach ($instructions as $instruction) {
         if (!isset($containers['bot'][$instruction['bot']])) {
@@ -65,12 +58,22 @@ while($doneInstructions > 0) {
         $min = array_shift($containers['bot'][$instruction['bot']]);
         
         $destiny = $instruction['high']['type'];
-        $containers[$destiny][$instruction['high']['number']][] = $max;
+        $number = $instruction['high']['number'];
+        
+        if ($destiny == 'bot') {
+            addChip($containers['bot'], $number, $max);
+        } else {
+            $containers['output'][$number][] = $max;
+        }
         
         $destiny = $instruction['low']['type'];
-        $containers[$destiny][$instruction['low']['number']][] = $min;
+        $number = $instruction['low']['number'];
         
-        $containers = orderContainers($containers);
+        if ($destiny == 'bot') {
+            addChip($containers['bot'], $number, $min);
+        } else {
+            $containers['output'][$number][] = $min;
+        };
         
         $doneInstructions++;
     }
@@ -81,19 +84,15 @@ $solution = $containers['output'][0][0] * $containers['output'][1][0] * $contain
 echo 'Solution: '.$solution.PHP_EOL;
 echo 'Time: '.number_format(microtime(true) - $start,2);
 
-function orderContainers(array $containers): array {
-    $aux = [];
-    $aux['bot'] = orderContainer($containers['bot']);
-    $aux['output'] = orderContainer($containers['output']);
-    return $aux;
-}
-
-function orderContainer(array $container): array {
-    $aux = [];
-    foreach ($container as $key => $values) {
-        asort($values);
-        $aux[$key] = $values;
+function addChip(array &$container, int $bot, int $value): void {
+    if (!isset($container[$bot])) {
+        $container[$bot] = [$value];
+        return;
     }
-    ksort($aux);
-    return $aux;
+    
+    if ($value < $container[$bot][0]) {
+        array_unshift($container[$bot], $value);
+    } else {
+        $container[$bot][] = $value;
+    }
 }
