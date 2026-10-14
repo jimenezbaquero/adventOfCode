@@ -135,3 +135,19 @@ function factorial($n) {
     
     return $result;
 }
+
+function mcd($a, $b) {
+    while ($b != 0) {
+        [$a, $b] = [$b, $a % $b];
+    }
+    
+    return abs($a);
+}
+
+function mcm($a, $b) {
+    return intdiv($a, mcd($a, $b)) * $b;
+}
+
+function mcmArray($numbers) {
+    return array_reduce($numbers, fn($carry, $number) => mcm($carry, $number), 1);
+}
