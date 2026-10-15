@@ -24,7 +24,9 @@ $solutionLength = $aux;
 $sum = generateSum($code, $steps, $solutionLength);
 
 echo 'Solution : '.$sum.PHP_EOL;
-echo 'Time: '.number_format(microtime(true) - $start,2);
+echo 'Time: '.number_format(microtime(true) - $start,2).PHP_EOL;
+echo 'Memory used: '.number_format(memory_get_peak_usage() / 1024 / 1024, 2).' MB'.PHP_EOL;
+echo 'Memory reserved: '.number_format(memory_get_peak_usage(true) / 1024 / 1024, 2).' MB'.PHP_EOL;
 
 
 function generateSum($code, $steps, $solutionLength) {
