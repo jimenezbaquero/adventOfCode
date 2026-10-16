@@ -19,7 +19,6 @@ while (!$find) {
         $find = true;
     }
 }
-echo 'codigo generado'.PHP_EOL;
 
 $code = substr($code, 0, $length);
 
@@ -30,7 +29,6 @@ echo 'Time: '.number_format(microtime(true) - $start,2);
 
 
 function generateDragonCurve($code) {
-    $a = $code;
     $a = str_split($code);
     $b = array_reverse($a);
     
