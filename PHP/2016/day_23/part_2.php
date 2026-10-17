@@ -192,7 +192,6 @@ function findProduct($instructionNumber, $instructions, $state) {
     $instruction5 = $instructions[$instructionNumber + 4];
     $instruction6 = $instructions[$instructionNumber + 5];
     
-    // Comprobar operaciones
     if ($instruction1['operation'] != 'cpy'
         || !in_array($instruction2['operation'], ['inc', 'dec'])
         || $instruction3['operation'] != 'dec'
@@ -202,7 +201,6 @@ function findProduct($instructionNumber, $instructions, $state) {
         return false;
     }
     
-    // Comprobar saltos
     if ($instruction4['value2'] != '-2'
         || $instruction6['value2'] != '-5') {
         return false;
@@ -213,7 +211,6 @@ function findProduct($instructionNumber, $instructions, $state) {
     $counter = $instruction3['value'];
     $outerCounter = $instruction5['value'];
     
-    // Comprobar registros
     if (!isset($state[$source], $state[$target], $state[$counter], $state[$outerCounter])) {
         return false;
     }
@@ -222,18 +219,15 @@ function findProduct($instructionNumber, $instructions, $state) {
         return false;
     }
     
-    // Comprobar que cpy copia en el contador interior
     if ($instruction1['value2'] != $counter) {
         return false;
     }
     
-    // Comprobar saltos sobre los registros correctos
     if ($instruction4['value'] != $counter
         || $instruction6['value'] != $outerCounter) {
         return false;
     }
     
-    // Comprobar que los contadores son positivos
     if ($state[$source] <= 0 || $state[$outerCounter] <= 0) {
         return false;
     }
