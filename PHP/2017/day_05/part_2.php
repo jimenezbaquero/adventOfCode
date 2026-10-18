@@ -10,13 +10,14 @@ $data = loadFile('input.txt');
 $total = 0;
 $states = [];
 $position = 0;
-$total = 0;
 
 foreach ($data as $line) {
     $states[] = intval($line);
 }
 
-while ($position >= 0 && $position < count($states)) {
+$numStates = count($states);
+
+while ($position >= 0 && $position < $numStates) {
     $steps = $states[$position];
     if($steps >= 3){
         $states[$position]--;
