@@ -28,7 +28,7 @@ for($i = 0; $i < $size; $i++) {
 
 for ($j = 0; $j < 64; $j++) {
     foreach ($movements as $char) {
-        $movement = intval($movement);
+        $movement = intval($char);
         $aux = $grid;
         for ($i = 0; $i < $char; $i++) {
             $aux[($pos + $char - 1 - $i) % $size] = $grid[($pos + $i) % $size];
