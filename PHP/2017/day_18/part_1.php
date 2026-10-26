@@ -28,6 +28,9 @@ $instruction = $instructions[$instructionNumber];
     switch ($instruction['operation']) {
         case 'snd';
             $instructionNumber++;
+            if(!isset($state[$instruction['value']])){
+                $state[$instruction['value']] = 0;
+            }
             $sound = $state[$instruction['value']];
             break;
         case 'set':
@@ -35,6 +38,9 @@ $instruction = $instructions[$instructionNumber];
             if (is_numeric($instruction['value2'])) {
                 $value2 = intval($instruction['value2']);
             }else{
+                if(!isset($state[$instruction['value2']])){
+                    $state[$instruction['value2']] = 0;
+                }
                 $value2 = $state[$instruction['value2']];
             }
             $state[$instruction['value']] = $value2;
@@ -44,6 +50,9 @@ $instruction = $instructions[$instructionNumber];
             if (is_numeric($instruction['value2'])) {
                 $value2 = intval($instruction['value2']);
             }else{
+                if(!isset($state[$instruction['value2']])){
+                    $state[$instruction['value2']] = 0;
+                }
                 $value2 = $state[$instruction['value2']];
             }
             $state[$instruction['value']] += $value2;
@@ -53,6 +62,9 @@ $instruction = $instructions[$instructionNumber];
             if (is_numeric($instruction['value2'])) {
                 $value2 = intval($instruction['value2']);
             }else{
+                if(!isset($state[$instruction['value2']])){
+                    $state[$instruction['value2']] = 0;
+                }
                 $value2 = $state[$instruction['value2']];
             }
             $state[$instruction['value']] *= $value2;
@@ -62,12 +74,18 @@ $instruction = $instructions[$instructionNumber];
             if (is_numeric($instruction['value2'])) {
                 $value2 = intval($instruction['value2']);
             }else{
+                if(!isset($state[$instruction['value2']])){
+                    $state[$instruction['value2']] = 0;
+                }
                 $value2 = $state[$instruction['value2']];
             }
             $state[$instruction['value']] %= $value2;
             break;
         case 'rcv';
             $instructionNumber++;
+            if(!isset($state[$instruction['value']])){
+                $state[$instruction['value']] = 0;
+            }
             $state[$instruction['value']] = $sound;
             if($sound != 0){
                 $solution = $sound;
@@ -78,11 +96,17 @@ $instruction = $instructions[$instructionNumber];
             if (is_numeric($instruction['value'])) {
                 $value = intval($instruction['value']);
             } else {
+                if(!isset($state[$instruction['value']])){
+                    $state[$instruction['value']] = 0;
+                }
                 $value = $state[$instruction['value']];
             }
             if (is_numeric($instruction['value2'])) {
                 $value2 = intval($instruction['value2']);
             } else {
+                if(!isset($state[$instruction['value2']])){
+                    $state[$instruction['value2']] = 0;
+                }
                 $value2 = $state[$instruction['value2']];
             }
             if ($value == 0) {
@@ -92,7 +116,7 @@ $instruction = $instructions[$instructionNumber];
             }
             break;
     }
-    
+
     if($instructionNumber < 0 || $instructionNumber >= count($instructions)) {
         $hasNextInstruction = false;
     }
