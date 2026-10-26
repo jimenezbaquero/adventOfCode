@@ -93,7 +93,6 @@ while ($existNext){
     }else{
         $existNext = false;
     }
-    echo 'Proxima: '.$row.'-'.$column.', dirección: '.$direction.', siguiente: '.$next.PHP_EOL;
 }
 
 echo 'Solution: '.$solution.PHP_EOL;
