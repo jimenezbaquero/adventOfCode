@@ -163,3 +163,7 @@ function strpos_all($haystack, $needle) {
 
     return $positions;
 }
+
+function sign($value){
+    return $value <=> 0;
+}
