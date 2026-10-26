@@ -1,6 +1,5 @@
 <?php
 $start = microtime(true);
-
 require_once('../../functions.php');
 
 $data = loadFile('input.txt');
