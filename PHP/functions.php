@@ -22,6 +22,23 @@ function transpose($array) {
     return $response;
 }
 
+function rotate($array) {
+    return array_map('array_reverse', transpose($array));
+}
+
+function flip($array) {
+    return array_map('array_reverse', $array);
+}
+
+function matrixToString($matrix){
+    $text = '';
+    foreach ($matrix as $row){
+        $text .= implode('',$row).'/';
+    }
+    $text = rtrim($text,'/');
+    return $text;
+}
+
 function paint($array ,$key = null){
     $keys = array_keys($array);
     $minKey = min($keys);
