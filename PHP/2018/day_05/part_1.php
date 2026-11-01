@@ -16,18 +16,18 @@ $position = 0;
 while ($hasNext) {
     $char = $polymer[$position];
     $next = $polymer[$position + 1];
-    if($char == strtoupper($next) || $char == strtolower($next)) {
+    if($char != $next && ($char == strtoupper($next) || $char == strtolower($next))) {
         $polymer = substr($polymer, 0, $position).substr($polymer, $position + 2);
         $position = max(0, $position - 1);
     }else{
         $position++;
     }
-    if(strlen($polymer) < $position + 2) {
+    if(!isset($polymer[$position + 1])) {
         $hasNext = false;
     }
 }
 
-$solution = $polymer;
+$solution = strlen($polymer);
 
 echo 'Solution : ' . $solution . PHP_EOL;
 echo 'Time: ' . number_format(microtime(true) - $start, 2) . PHP_EOL;
