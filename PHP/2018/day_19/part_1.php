@@ -42,11 +42,6 @@ $pointer = [
 $numInstructions = count($instructions);
 $inRange = true;
 while ($inRange) {
-    if(findPattern($instructions, $pointer)){
-        echo 'Patron encontrado';
-        $state[4]++;
-    }
-
     $instruction = $instructions[$pointer['value']];
     executeInstruction($instruction, $pointer, $state);
     if($pointer['value'] < 0 || $pointer['value'] >= $numInstructions) {
@@ -145,4 +140,3 @@ function executeInstruction($instruction, &$pointer, &$state) {
     $state[$instruction['destiny']] = $result;
     $pointer['value'] = $state[$pointer['register']] + 1;
 }
-
