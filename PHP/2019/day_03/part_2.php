@@ -56,7 +56,6 @@ foreach ($paths as $key => $path) {
             if (!isset($grid[$pos['col']][$pos['row']][$key])) {
                 $grid[$pos['col']][$pos['row']][$key] = $movements;
             }
-            
             $movements++;
         }
     }
